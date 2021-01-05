@@ -17,6 +17,10 @@ const postSchema = new Schema({
       createdAt: String,
     },
   ],
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "users",
+  },
 });
 
 // exporting model itself with the schema
