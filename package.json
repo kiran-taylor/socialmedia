@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   "serve":"nodemon index",
-   "start":"node index"
-
+    "serve": "nodemon index",
+    "start": "node index"
   },
   "keywords": [],
   "author": "",
@@ -16,7 +15,7 @@
     "bcryptjs": "^2.4.3",
     "graphql": "^15.4.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.10",
-    "nodemon": "^2.0.6"
+    "moment": "^2.29.1",
+    "mongoose": "^5.11.10"
   }
 }

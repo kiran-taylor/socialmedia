@@ -31,12 +31,20 @@ module.exports = {
       }
       const user = await User.findOne({ username });
       if (!user) {
-        throw new UserInputError("user not found");
+        throw new UserInputError("user not found", {
+          errors: {
+            username: "user not found",
+          },
+        });
       }
 
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        throw new UserInputError("password doesnt match");
+        throw new UserInputError("password doesnt match", {
+          errors: {
+            password: "password doesnt match",
+          },
+        });
       }
       const token = generateToken(user);
       return {

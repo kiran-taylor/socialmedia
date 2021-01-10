@@ -31,6 +31,7 @@ module.exports = {
     },
     async deleteComment(_, { postid, commentid }, context) {
       const user = checkauth(context);
+     
 
       const post = await Post.findById(postid);
       if (post) {
