@@ -13,8 +13,11 @@ function DeleteButton({ postid, callback }) {
       const data = proxy.readQuery({
         query: FETCH_POSTS,
       });
-      data.getPosts = data.getPosts.filter((p) => p.id !== postid);
-      proxy.writeQuery({ query: FETCH_POSTS, data });
+      const deletepost = data.getPosts.filter((p) => p.id !== postid);
+      proxy.writeQuery({
+        query: FETCH_POSTS,
+        data: { getPosts: [...deletepost] },
+      });
       if (callback) callback();
     },
     variables: {
