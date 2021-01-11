@@ -39,11 +39,20 @@ function SinglePost(props) {
       commentCount,
     } = data.getPost;
 
+    console.log("comments", comments);
+
     postMarkUp = (
       <Grid>
         <Grid.Row>
           <Grid.Column>
-            <Card style={{ margin: "30px" }}>
+            <Card
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                overflow: "hidden",
+                margin: "10px",
+              }}
+            >
               <Card.Content>
                 <Card.Header>{username}</Card.Header>
                 <Card.Meta>{moment(createdAt).fromNow()}</Card.Meta>
@@ -69,6 +78,15 @@ function SinglePost(props) {
                 )}
               </Card.Content>
             </Card>
+            {comments.map((comment) => (
+              <Card key={comment.id} fluid>
+                <Card.Content>
+                  <Card.Header>{comment.username}</Card.Header>
+                  <Card.Meta>{moment(comment.createdAt).fromNow()}</Card.Meta>
+                  <Card.Description>{comment.body}</Card.Description>
+                </Card.Content>
+              </Card>
+            ))}
           </Grid.Column>
         </Grid.Row>
       </Grid>
