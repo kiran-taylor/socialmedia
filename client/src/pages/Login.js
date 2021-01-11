@@ -32,6 +32,8 @@ function Login(props) {
 
   return (
     <div style={{ width: "400px", margin: "auto", marginTop: "100px" }}>
+      <h2>Login</h2>
+
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
         <Form.Input
           placeholder="username"
@@ -50,7 +52,7 @@ function Login(props) {
           onChange={onChange}
         />
         <Button type="submit" primary>
-          Register
+          Login
         </Button>
       </Form>
       {Object.keys(errors).length > 0 && (

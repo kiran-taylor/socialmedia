@@ -33,6 +33,7 @@ function Register(props) {
   }
   return (
     <div style={{ width: "400px", margin: "auto", marginTop: "100px" }}>
+      <h2>Register</h2>
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
         <Form.Input
           placeholder="username"

@@ -1,21 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Button } from "semantic-ui-react";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 
 import { useForm } from "../util/hooks";
+import { FETCH_POSTS } from "../util/graphql";
 
 function PostForm() {
   const { values, onSubmit, onChange } = useForm(createPostCallback, {
     body: "",
   });
 
-  const [createPost, { error }] = useMutation(CREATE_POST, {
-    update(proxy, results) {
-      console.log("proxy", proxy);
-      console.log("results", results);
+  const [error, setError] = useState({});
+
+  const [createPost] = useMutation(CREATE_POST, {
+    update(proxy, result) {
+      const data = proxy.readQuery({
+        query: FETCH_POSTS,
+      });
+      const new_post = result.data.createPost;
+      proxy.writeQuery({
+        query: FETCH_POSTS,
+        data: { getPosts: [new_post, ...data.getPosts] },
+      });
       values.body = "";
-      console.log("values", values);
+    },
+    onError(err) {
+      setError(err.graphQLErrors[0].message);
     },
     variables: values,
   });
@@ -26,12 +37,13 @@ function PostForm() {
 
   return (
     <>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} style={{ marginTop: "30px" }}>
+        <h3>Create a post </h3>
         <Form.Field>
           <Form.Input
             placeholder="create a post"
             type="text"
-            error={error ? true : false}
+            error={error.body ? true : false}
             name="body"
             onChange={onChange}
             value={values.body}
@@ -41,18 +53,17 @@ function PostForm() {
           Post
         </Button>
       </Form>
-      {error && (
+      {Object.keys(error).length > 0 && (
         <div className="ui error message">
-          <ul className="list">
-            <li>{error.graphQLErrors[0].message}</li>
-          </ul>
+          <ul className="list">{Object.values(error)}</ul>
+          {/* <Button>close</Button> */}
         </div>
       )}
     </>
   );
 }
 const CREATE_POST = gql`
-  mutation createpost($body: String!) {
+  mutation createPost($body: String!) {
     createPost(body: $body) {
       id
       username

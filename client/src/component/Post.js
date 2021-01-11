@@ -1,50 +1,56 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card, Button, Icon, Label } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { VscArchive } from "react-icons/vsc";
 
-const Post = ({
-  post: { id, body, createdAt, username, commentCount, likesCount },
-}) => (
-  <Card.Group>
-    <Card fluid style={{ marginTop: "30px" }}>
-      <Card.Content>
-        <Card.Header>{username}</Card.Header>
-        <Card.Meta as={Link} to={`/posts/${id}`}>
-          {moment(createdAt).fromNow(true)}
-        </Card.Meta>
-        <Card.Description>{body}</Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+import { AuthContext } from "../context/auth";
+import LikeButton from "./LikeButton";
+import DeleteButton from "./DeleteButton";
+
+function Post({
+  post: {
+    id,
+    body,
+    createdAt,
+    username,
+    commentCount,
+    likesCount,
+    likes,
+    comments,
+  },
+}) {
+  const { user } = useContext(AuthContext);
+  return (
+    <Card.Group>
+      <Card fluid style={{ marginTop: "30px" }}>
+        <Card.Content>
+          <Card.Header>{username}</Card.Header>
+          <Card.Meta as={Link} to={`/posts/${id}`}>
+            {moment(createdAt).fromNow(true)}
+          </Card.Meta>
+          <Card.Description>{body}</Card.Description>
+        </Card.Content>
+        <Card.Content extra>
           <div>
-            <Button as="div" labelPosition="right" size="mini">
-              <Button basic color="red">
-                <Icon name="heart" />
+            <div>
+              <LikeButton user={user} post={{ id, likes, likesCount }} />
+              <Button labelPosition="right" as={Link} to={`/posts/${id}`}>
+                <Button basic color="blue">
+                  <Icon name="comment" />
+                </Button>
+                <Label basic color="blue" pointing="left">
+                  {commentCount > 100 ? commentCount + "k" : commentCount}
+                </Label>
               </Button>
-              <Label as="a" basic color="red" pointing="left">
-                {likesCount}
-              </Label>
-            </Button>
-            <Button as="div" labelPosition="right">
-              <Button basic color="blue">
-                <Icon name="comment" />
-              </Button>
-              <Label as="a" basic color="blue" pointing="left">
-                {commentCount > 100 ? commentCount + "k" : commentCount}
-              </Label>
-            </Button>
+              {user && user.username === username && (
+                <DeleteButton postid={id} />
+              )}
+            </div>
           </div>
-          <div>
-            <Button color="red" size="mini">
-              <VscArchive />
-            </Button>
-          </div>
-        </div>
-      </Card.Content>
-    </Card>
-  </Card.Group>
-);
+        </Card.Content>
+      </Card>
+    </Card.Group>
+  );
+}
 
 export default Post;
