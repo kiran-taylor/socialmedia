@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "nodemon index",
+    "serve": "node index",
     "start": "node index"
   },
   "keywords": [],

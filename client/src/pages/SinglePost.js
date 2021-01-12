@@ -91,7 +91,7 @@ function SinglePost(props) {
               </Card.Content>
             </Card>
             {user && (
-              <Card>
+              <Card style={{ paddingRight: "100px" }}>
                 <Card.Content>
                   <p>post a comment</p>
                   <Form>
@@ -117,7 +117,7 @@ function SinglePost(props) {
               </Card>
             )}
             {comments.map((comment) => (
-              <Card key={comment.id} fluid>
+              <Card key={comment.id}>
                 <Card.Content>
                   {user && user.username === comment.username && (
                     <DeleteButton postid={id} commentid={comment.id} />

@@ -31,16 +31,16 @@ function DeleteButton({ postid, commentid, callback }) {
     },
   });
   return (
-    <div>
+    <>
       <Button floated="right" onClick={() => setConfirmOpen(true)}>
-        <Icon name="trash" style={{ margin: 0 }} />
+        <Icon name="trash" />
       </Button>
       <Confirm
         open={confirmOpen}
         onCancel={() => setConfirmOpen(false)}
         onConfirm={deletePostOrComment}
       />
-    </div>
+    </>
   );
 }
 
