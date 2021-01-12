@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { UserInputError } = require("apollo-server");
 
 const { SECRET_KEY } = require("../config");
 
@@ -11,12 +12,16 @@ module.exports = (context) => {
         const user = jwt.verify(token, SECRET_KEY);
         return user;
       } else {
-        throw new Error("invalid token");
+        throw new UserInputError("invalid token");
       }
     } catch (e) {
-      throw new Error("Invalid Token");
+      throw new UserInputError("Invalid Token");
     }
   } else {
-    throw new Error("Authorization error");
+    throw new UserInputError(" bro Authorization error", {
+      errors: {
+        auth: "authentication error",
+      },
+    });
   }
 };

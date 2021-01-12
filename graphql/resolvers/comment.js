@@ -6,6 +6,7 @@ const Post = require("../../models/Post");
 module.exports = {
   Mutation: {
     async createComment(_, { postid, body }, context) {
+      console.log("createComment");
       const user = checkauth(context);
 
       if (body.trim() === "") {
@@ -30,8 +31,8 @@ module.exports = {
       }
     },
     async deleteComment(_, { postid, commentid }, context) {
+      console.log("deleteComment");
       const user = checkauth(context);
-     
 
       const post = await Post.findById(postid);
       if (post) {
@@ -50,6 +51,7 @@ module.exports = {
       }
     },
     async likes(_, { postid }, context) {
+      console.log("likes");
       const user = checkauth(context);
 
       const post = await Post.findById(postid);

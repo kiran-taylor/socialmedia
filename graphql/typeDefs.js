@@ -30,6 +30,7 @@ module.exports = gql`
 
   type Query {
     getPosts: [Post]
+    getPost(postid: ID!): Post!
   }
 
   type Mutation {
