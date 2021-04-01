@@ -12,27 +12,29 @@ const Home = () => {
   const { loading, data } = useQuery(FETCH_POSTS);
   console.log(data);
   return (
-    <Grid columns="three" style={{ margin: "20px" }}>
-      <Grid.Row>
-        {user && (
-          <Grid.Column>
-            <PostForm />
-          </Grid.Column>
-        )}
-        {loading ? (
-          <h1>loading...</h1>
-        ) : (
-          <Transition.Group>
-            {data.getPosts &&
-              data.getPosts.map((post) => (
-                <Grid.Column key={post.id}>
-                  <Post post={post} />
-                </Grid.Column>
-              ))}
-          </Transition.Group>
-        )}
-      </Grid.Row>
-    </Grid>
+    <div>
+      <Grid columns="three" style={{ margin: "5px" }}>
+        <Grid.Row>
+          {user && (
+            <Grid.Row style={{ marginLeft: "30px" }}>
+              <PostForm />
+            </Grid.Row>
+          )}
+          {loading ? (
+            <h1>loading...</h1>
+          ) : (
+            <Transition.Group>
+              {data.getPosts &&
+                data.getPosts.map((post) => (
+                  <Grid.Row key={post.id}>
+                    <Post post={post} />
+                  </Grid.Row>
+                ))}
+            </Transition.Group>
+          )}
+        </Grid.Row>
+      </Grid>
+    </div>
   );
 };
 

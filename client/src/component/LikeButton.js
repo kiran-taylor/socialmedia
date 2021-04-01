@@ -6,7 +6,7 @@ import { Button, Icon, Label } from "semantic-ui-react";
 
 function LikeButton({ user, post: { id, likes, likesCount } }) {
   const [liked, setLiked] = useState(false);
-  const [_, setError] = useState({});
+  const [setError] = useState({});
 
   useEffect(() => {
     if (user && likes.find((like) => like.username === user.username)) {

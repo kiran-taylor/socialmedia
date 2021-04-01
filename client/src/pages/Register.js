@@ -32,7 +32,7 @@ function Register(props) {
     addUser();
   }
   return (
-    <div style={{ width: "400px", margin: "auto", marginTop: "100px" }}>
+    <div style={{ width: "250px", margin: "auto", marginTop: "100px" }}>
       <h2>Register</h2>
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
         <Form.Input

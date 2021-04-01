@@ -31,7 +31,7 @@ function Login(props) {
   }
 
   return (
-    <div style={{ width: "400px", margin: "auto", marginTop: "100px" }}>
+    <div style={{ width: "250px", margin: "auto", marginTop: "100px" }}>
       <h2>Login</h2>
 
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>

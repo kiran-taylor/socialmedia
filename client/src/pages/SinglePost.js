@@ -58,6 +58,7 @@ function SinglePost(props) {
         <Grid.Row>
           <Grid.Column>
             <Card
+              fluid
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -91,11 +92,14 @@ function SinglePost(props) {
               </Card.Content>
             </Card>
             {user && (
-              <Card style={{ paddingRight: "100px" }}>
+              <Card style={{ margin: "10px" }}>
                 <Card.Content>
                   <p>post a comment</p>
                   <Form>
-                    <div className="ui action input ">
+                    <div
+                      className="ui action input"
+                      style={{ display: "flex", flexDirection: "column" }}
+                    >
                       <input
                         type="text"
                         placeholder="comment..."
@@ -117,7 +121,7 @@ function SinglePost(props) {
               </Card>
             )}
             {comments.map((comment) => (
-              <Card key={comment.id}>
+              <Card key={comment.id} fluid style={{ margin: "10px" }}>
                 <Card.Content>
                   {user && user.username === comment.username && (
                     <DeleteButton postid={id} commentid={comment.id} />

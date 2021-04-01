@@ -22,7 +22,7 @@ function Post({
   const { user } = useContext(AuthContext);
   return (
     <Card.Group>
-      <Card fluid style={{ marginTop: "5px" }}>
+      <Card fluid style={{ marginTop: "30px" }}>
         <Card.Content>
           <Card.Header>{username}</Card.Header>
           <Card.Meta as={Link} to={`/posts/${id}`}>
